@@ -1,13 +1,17 @@
-import { useAuth0 } from "@auth0/auth0-react"
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Home() {
-  const {loginWithRedirect, logout} = useAuth0()
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   return (
     <>
-    <p>ログインする</p>
-    <button onClick={() => loginWithRedirect()}>ログインする</button>
-    <button onClick={() => logout()}>ログアウトする</button>
+      <p>ログインする</p>
+      <button onClick={() => loginWithRedirect()}>ログインする</button>
+      {isAuthenticated && (
+        <>
+          <p>{user?.name}</p>
+          <button onClick={() => logout()}>ログアウトする</button>
+        </>
+      )}
     </>
-  )
+  );
 }
